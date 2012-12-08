@@ -1570,7 +1570,7 @@ AC_HELP_STRING([--enable-video-qtmoko], [use qtmoko video driver [[default=no]]]
             SDLMAIN_SOURCES="$srcdir/src/main/qtmoko/*.cc"
             EXTRA_CFLAGS="$EXTRA_CFLAGS $QTMOKO_FLAGS"
             SDL_CFLAGS="$SDL_CFLAGS -DQWS -Dmain=SDL_main"
-            EXTRA_LDFLAGS="-lSDLmain $SDL_LIBS -L$qtmoko_sdk/lib -L$qtmoko_sdk/qtopiacore/target/lib -lQtGui -lQtNetwork -lQtScript -lqtopia -lqtopiabase"
+            EXTRA_LDFLAGS="-lSDLmain $SDL_LIBS -L$qtmoko_sdk/lib -L$qtmoko_sdk/qtopiacore/target/lib -lQtGui -lQtNetwork -lQtScript -lqtopia -lqtopiabase -lpulse-simple"
             have_video=yes
         fi
         AC_LANG_C
