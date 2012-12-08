@@ -1,0 +1,67 @@
+
+==============================================================================
+Using the Simple DirectMedia Layer with QtMoko
+==============================================================================
+
+==============================================================================
+I.  Setting up the QtMoko development environment.
+
+  You need to compile QtMoko from sources as described here:
+
+     https://github.com/radekp/qtmoko/blob/master/README
+
+==============================================================================
+II.  Building the Simple DirectMedia Layer libraries
+     
+  Cross compiling was not currently tested. Native compiling is
+  tested and works on PC and arm:
+     
+     ./configure --enable-video-qtmoko --with-qtmoko-sdk=/root/qte/build/sdk --disable-video-dummy --disable-video-fbcon  --disable-video-dga --disable-arts --disable-esd --disable-alsa --disable-cdrom --disable-video-x11 --disable-oss --disable-nasm --disable-input-events --disable-input-tslib --prefix=/opt/qtmoko
+    make
+    make install
+
+==============================================================================
+III.  Running SDL applications under QtMoko 
+
+  Just install your favourite SDL app and run it. There will be prepared
+  packages on QtMoko apps web with QtMoko .desktop files.
+
+  
+==============================================================================
+IV.   What is supported:
+
+  Supported hardware is Neo Freerunner and Goldelico's GTA04. Because these
+  devices don't have HW keys the qtmoko video driver has scripting ability to
+  map touchscreen events to SDL key events. You need to do:
+  
+    export SDL_QT_SCRIPT=/path/to/your/script.js
+  
+  The script can look like this:
+  
+    (function(x, y, w, h)
+    {
+        if(y < h / 4) { sym=13; return true; }
+        if(x < w / 3) { sym=276; return true; }
+        if(x > 2 * w / 3) { sym=275; return true; }
+        sym=273; return true;
+    }
+    )
+
+  It must be valid javascript function. It takes touch x,y position and screen
+  dimensions w,h. If it returns false, then nothing happens and mouse event is
+  generated. If it returns true then key event is generated and we fill
+  SDL_keysym struct. You can set sym, scancode and mod variables in javascript
+  to desired key.
+  
+  Another QtMoko specific environment variable is SDL_QT_FS. If you do:
+  
+    export SDL_QT_FS=1
+    
+  then SDL apps will start in fullscreen. Otherwise it's just maximized window
+  which has the advantage that it can use onscreen keyboard.
+  
+
+-- 
+Radek Polak <psonek2@seznam.cz>
+http://qtmoko.sourceforge.net/
+
