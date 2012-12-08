@@ -23,8 +23,13 @@ II.  Building the Simple DirectMedia Layer libraries
 ==============================================================================
 III.  Running SDL applications under QtMoko 
 
-  Just install your favourite SDL app and run it. There will be prepared
-  packages on QtMoko apps web with QtMoko .desktop files.
+  Just install your favourite SDL app, set video driver to QtMoko and run it.
+  E.g.:
+  
+    export SDL_VIDEODRIVER=QtMoko
+    scummvm
+  
+  There will be prepared packages on QtMoko apps with QtMoko .desktop files.
 
   
 ==============================================================================
@@ -51,7 +56,7 @@ IV.   What is supported:
   dimensions w,h. If it returns false, then nothing happens and mouse event is
   generated. If it returns true then key event is generated and we fill
   SDL_keysym struct. You can set sym, scancode and mod variables in javascript
-  to desired key.
+  to desired key. Returning sym=-1 will toggle fullscreen.
   
   Another QtMoko specific environment variable is SDL_QT_FS. If you do:
   

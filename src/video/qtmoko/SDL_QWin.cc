@@ -198,7 +198,20 @@ void SDL_QWin::mousePressEvent(QMouseEvent *e) {
     QScriptValue scriptRes = scriptFun.call(QScriptValue(), args);
     if(scriptRes.toBool()) {
         
-        pressedKey.sym = (SDLKey) scriptEngine.globalObject().property("sym").toInt32();
+        int sym = scriptEngine.globalObject().property("sym").toInt32();
+        
+        // -1 leaves fullscreen
+        if(sym == -1) {
+            if(debug)
+                qDebug() << "toggle fullscreen";
+            setWindowState(windowState() ^ Qt::WindowFullScreen);
+            setWindowState(windowState() ^ Qt::WindowMaximized);
+            setWindowState(Qt::WindowActive);
+            QMenu *menu = QSoftMenuBar::menuFor(this);
+            menu->show();
+            return;
+        }
+        pressedKey.sym = (SDLKey) sym;
         pressedKey.scancode = (Uint8)(scriptEngine.globalObject().property("scancode").toInt32());
         pressedKey.unicode = 0;
         pressedKey.mod = (SDLMod)(scriptEngine.globalObject().property("mod").toInt32());

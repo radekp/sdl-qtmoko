@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'SDL_QWin.h'
 **
-** Created: Fri Dec 7 10:46:51 2012
+** Created: Sat Dec 8 13:16:58 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_SDL_QWin[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,6 +35,7 @@ static const uint qt_meta_data_SDL_QWin[] = {
       29,    9,    9,    9, 0x0a,
       46,    9,    9,    9, 0x0a,
       61,    9,    9,    9, 0x0a,
+      77,    9,    9,    9, 0x0a,
 
        0        // eod
 };
@@ -42,7 +43,7 @@ static const uint qt_meta_data_SDL_QWin[] = {
 static const char qt_meta_stringdata_SDL_QWin[] = {
     "SDL_QWin\0\0showOnFullScreen()\0"
     "toggleKeyboard()\0enableRedraw()\0"
-    "disableRedraw()\0"
+    "disableRedraw()\0quitApp()\0"
 };
 
 void SDL_QWin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -55,6 +56,7 @@ void SDL_QWin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->toggleKeyboard(); break;
         case 2: _t->enableRedraw(); break;
         case 3: _t->disableRedraw(); break;
+        case 4: _t->quitApp(); break;
         default: ;
         }
     }
@@ -93,9 +95,9 @@ int SDL_QWin::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
