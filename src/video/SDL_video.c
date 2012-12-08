@@ -51,6 +51,9 @@ static VideoBootStrap *bootstrap[] = {
 #if SDL_VIDEO_DRIVER_QTOPIA
 	&Qtopia_bootstrap,
 #endif
+#if SDL_VIDEO_DRIVER_QTMOKO
+    &QtMoko_bootstrap,
+#endif
 #if SDL_VIDEO_DRIVER_WSCONS
 	&WSCONS_bootstrap,
 #endif

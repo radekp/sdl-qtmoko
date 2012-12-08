@@ -1539,6 +1539,44 @@ AC_HELP_STRING([--enable-video-qtopia], [use Qtopia video driver [[default=no]]]
     fi
 }
 
+dnl Set up the QtMoko video driver if enabled
+CheckQtMoko() {
+    AC_ARG_ENABLE(video-qtmoko,
+AC_HELP_STRING([--enable-video-qtmoko], [use qtmoko video driver [[default=no]]]),
+                  , enable_video_qtmoko=no)
+    AC_ARG_WITH(qtmoko-sdk,[  --with-qtmoko-sdk=PATH Path where QtMoko SDK is installed (optional)],
+               qtmoko_sdk="$withval", qtmoko_sdk="")
+
+    if test x$enable_video = xyes -a x$enable_video_qtmoko = xyes; then
+        AC_MSG_CHECKING(for QtMoko)
+        video_qtmoko=no
+        _qi=-I${qtmoko_sdk}/include
+        _qti=-I${qtmoko_sdk}/qtopiacore/target/include
+        QTMOKO_FLAGS="-fno-rtti -fno-exceptions -DQWS $_qi $_qi/qtopiabase $_qi/qtopia $_qti/QtGui $_qti/Qt $_qti/QtCore $_qti/QtScript $_qti "
+        AC_LANG_CPLUSPLUS
+        OLD_CXX="$CXXFLAGS"
+        CXXFLAGS="$QTMOKO_FLAGS"
+        AC_TRY_COMPILE([
+         #include <qtopiaapplication.h>
+        ],[
+        ],[
+        video_qtmoko=yes
+        ])
+        CXXFLAGS="$OLD_CXX"
+        AC_MSG_RESULT($video_qtmoko)
+        if test x$video_qtmoko = xyes; then
+            AC_DEFINE(SDL_VIDEO_DRIVER_QTMOKO)
+            SOURCES="$SOURCES $srcdir/src/video/qtmoko/*.cc"
+            SDLMAIN_SOURCES="$srcdir/src/main/qtmoko/*.cc"
+            EXTRA_CFLAGS="$EXTRA_CFLAGS $QTMOKO_FLAGS"
+            SDL_CFLAGS="$SDL_CFLAGS -DQWS -Dmain=SDL_main"
+            SDL_LIBS="-lSDLmain $SDL_LIBS -L$qtmoko_sdk/lib -L$qtmoko_sdk/qtopiacore/target/lib -lQtGui -lQtNetwork -lQtScript -lqtopia -lqtopiabase"
+            have_video=yes
+        fi
+        AC_LANG_C
+    fi
+}
+
 dnl Set up the PicoGUI video driver if enabled
 CheckPicoGUI()
 {
@@ -2332,6 +2370,7 @@ case "$host" in
         CheckAAlib
         CheckCaca
         CheckQtopia
+        CheckQtMoko
         CheckPicoGUI
         CheckOpenGLX11
         CheckInputEvents
