@@ -116,6 +116,11 @@ void SDL_QWin::showOnFullScreen()
     raise();
 }
 
+void SDL_QWin::quitApp()
+{
+    exit(0);
+}
+
 bool SDL_QWin::event(QEvent *event)
 {
     // Needed for QtMoko fullscreen

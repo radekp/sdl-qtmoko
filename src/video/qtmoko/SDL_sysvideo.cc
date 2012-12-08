@@ -239,6 +239,7 @@ extern "C" {
     QMenu *menu = QSoftMenuBar::menuFor(SDL_Win);
     menu->addAction("Fullscreen", SDL_Win, SLOT(showOnFullScreen()));
     menu->addAction("Toggle keyboard", SDL_Win, SLOT(toggleKeyboard()));
+    menu->addAction("Quit", SDL_Win, SLOT(quitApp()));
     menu->show();
     menu->hide();
     QObject::connect(menu, SIGNAL(aboutToShow()), SDL_Win, SLOT(disableRedraw()));

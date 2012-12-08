@@ -71,6 +71,7 @@ public slots:
    void toggleKeyboard();
    void enableRedraw();
    void disableRedraw();
+   void quitApp();
 
 protected:
   /* Handle resizing of the window */
