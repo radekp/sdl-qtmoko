@@ -82,7 +82,7 @@ else
 endif
 
 FLAVOURS = qtmoko
-confflags += --enable-video-qtmoko --with-qtmoko-sdk=/root/qte/build/sdk --disable-video-dummy --disable-video-fbcon  --disable-video-dga --disable-arts --disable-esd --disable-alsa --disable-cdrom --disable-video-x11 --disable-oss --disable-nasm --disable-input-events --disable-input-tslib --prefix=/opt/qtmoko
+confflags = --enable-video-qtmoko --with-qtmoko-sdk=/root/qte/build/sdk --disable-video-dummy --disable-video-fbcon  --disable-video-dga --disable-arts --disable-esd --enable-alsa --enable-pulseaudio --disable-video-x11 --disable-oss --disable-nasm --disable-input-events --disable-input-tslib --prefix=/opt/qtmoko
 
 configure: configure-stamp
 configure-stamp:
