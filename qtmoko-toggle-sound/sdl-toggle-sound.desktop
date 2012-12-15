@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment[]=Toggle sound in SDL programs
+Exec=sdl-toggle-sound.sh
+Icon=sdl-toggle-sound
+Type=Application
+Name[]=Sound on/off
+

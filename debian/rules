@@ -159,6 +159,12 @@ binary-arch: build install
 	    dh_install --sourcedir=builddir/$$dir/ -plibsdl1.2debian-$$dir build/.libs/*.so.* usr/lib/; \
 	done
 	rm -rf debian/libsdl1.2debian/usr/include
+	mkdir -p debian/libsdl-qtmoko/opt/qtmoko/apps/Games
+	mkdir -p debian/libsdl-qtmoko/opt/qtmoko/pics
+	mkdir -p debian/libsdl-qtmoko/opt/qtmoko/bin
+	cp qtmoko-toggle-sound/sdl-toggle-sound.desktop debian/libsdl-qtmoko/opt/qtmoko/apps/Games
+	cp qtmoko-toggle-sound/sdl-toggle-sound.png debian/libsdl-qtmoko/opt/qtmoko/pics
+	cp qtmoko-toggle-sound/sdl-toggle-sound.sh debian/libsdl-qtmoko/opt/qtmoko/bin
 	dh_strip
 	dh_compress
 	dh_fixperms
